@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Github, Linkedin, Instagram, Mail, FileText } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,6 +28,7 @@ const Contact = () => {
     setStatus({ type: '', message: '' });
 
     try {
+      // Save to Supabase
       const { error } = await supabase
         .from('contact_messages')
         .insert([
@@ -40,16 +43,24 @@ const Contact = () => {
 
       if (error) throw error;
 
+      // Send email via EmailJS
+      await emailjs.sendForm(
+        'ravindranathtagore.dev',  // Your EmailJS service ID
+        'template_zm0kwys',        // Your EmailJS template ID
+        formRef.current,
+        'B4WnJfWO45lCulYLE'        // Your EmailJS public key
+      );
+
       setStatus({
         type: 'success',
-        message: 'Thank you! Your message has been sent successfully.'
+        message: 'Yooo! Message sent successfully. I\'ll slide into your inbox soon! 🚀'
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error:', error);
       setStatus({
         type: 'error',
-        message: 'Oops! Something went wrong. Please try again or email me directly.'
+        message: 'Bruh, something broke 😅 Try again or just DM me directly!'
       });
     } finally {
       setIsSubmitting(false);
@@ -172,7 +183,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="bg-[#1a1a1a] p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-800">
+            <form ref={formRef} onSubmit={handleSubmit} className="bg-[#1a1a1a] p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-800">
               <div className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
@@ -187,7 +198,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-[#242424] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 transition-colors text-sm sm:text-base"
-                      placeholder="John Doe"
+                      placeholder="Your good name, legend ✨"
                     />
                   </div>
                   <div>
@@ -202,7 +213,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-[#242424] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 transition-colors text-sm sm:text-base"
-                      placeholder="john@example.com"
+                      placeholder="you@awesome.com"
                     />
                   </div>
                 </div>
@@ -219,7 +230,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-[#242424] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 transition-colors text-sm sm:text-base"
-                    placeholder="Project Inquiry"
+                    placeholder="Let's collab? Job offer? Just vibing?"
                   />
                 </div>
 
@@ -235,7 +246,7 @@ const Contact = () => {
                     required
                     rows={4}
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-[#242424] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 transition-colors resize-none text-sm sm:text-base"
-                    placeholder="Tell me about your project or just say hi..."
+                    placeholder="Spill the tea ☕ What's on your mind?"
                   />
                 </div>
 

@@ -12,25 +12,25 @@ const achievements = [
     orgName: "NASA"
   },
   {
-    title: "BIT Project 3rd Place",
-    image: "/certificates/BIT Project 3rd Place.png",
-    description: "Secured 3rd place in college project contest.",
-    orgLogo: "/logos/bangalore-institute-of-technology.png",
-    orgName: "Bangalore Institute of Technology"
+    title: "Science Forum 1st Prize",
+    image: "/certificates/Inter College Science Forum 1st prize.png",
+    description: "First prize in Inter-College Science Forum.",
+    orgLogo: "/logos/DSi.png",
+    orgName: "Dayananda Sagar Institutions"
   },
   {
-    title: "Frontend Competition Winner",
+    title: "Frontend Competition Second Runner Up",
     image: "/certificates/Frontend Competition Winning.png",
     description: "Winner of the departmental frontend dev competition.",
     orgLogo: "/logos/DSi.png",
     orgName: "Dayananda Sagar Institutions"
   },
   {
-    title: "Science Forum 1st Prize",
-    image: "/certificates/Inter College Science Forum 1st prize.png",
-    description: "First prize in Inter-College Science Forum.",
-    orgLogo: "/logos/DSi.png",
-    orgName: "Dayananda Sagar Institutions"
+    title: "BIT Project 3rd Place",
+    image: "/certificates/BIT Project 3rd Place.png",
+    description: "Secured 3rd place in college project contest.",
+    orgLogo: "/logos/bangalore-institute-of-technology.png",
+    orgName: "Bangalore Institute of Technology"
   },
   {
     title: "Altair Data Science Consolation",
