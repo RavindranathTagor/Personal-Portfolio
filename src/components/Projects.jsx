@@ -15,7 +15,7 @@ const projectsData = [
   {
     title: "AI-Powered Orbital Object Detection",
     description: "Developed an advanced space debris detection system using Python and YOLOv8 that analyzes satellite imagery in real-time through a web interface to identify and classify 11 types of space objects including satellites (CHEOPS, SOHO, SMART-1) and orbital debris with precise bounding box localization. Implemented hybrid neural network architecture combining YOLO object detection with Vision Transformer components and trained the model on space debris dataset, achieving 86.5% mAP accuracy.",
-    link: "#",
+    link: "https://github.com/RavindranathTagor/HOPS",
     linkText: "GitHub",
     type: "AI / ML",
     video: "/videos/BIT Project 3rd Place.mp4" 
