@@ -56,7 +56,7 @@ const About = () => {
                 I am a final-year Information Science and Engineering student at Dayananda Sagar Academy of Technology and Management, Bangalore, with a passion for building impactful solutions using modern web technologies and AI.
               </p>
               <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">
-                My journey involves developing award-winning projects—from IoT-based gamified rehabilitation systems to AI-powered space debris detection platforms. With a strong technical foundation in Java, Python, and React, I am constantly seeking opportunities to solve real-world challenges.
+                My journey involves developing award-winning projects from IoT-based gamified rehabilitation systems to AI-powered space debris detection platforms. With a strong technical foundation in Java, Python, and React, I am constantly seeking opportunities to solve real-world challenges.
               </p>
             </motion.div>
 
