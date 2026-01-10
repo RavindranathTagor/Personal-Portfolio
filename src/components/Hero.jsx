@@ -36,25 +36,50 @@ const Hero = () => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="container mx-auto px-4 sm:px-6 relative h-full flex items-center">
            
-           {/* Left Content: Typing Animation */}
-           <div className="absolute left-0 top-0 bottom-0 w-full md:w-1/2 flex flex-col justify-start pt-20 sm:pt-24 md:pt-0 md:justify-center items-center md:items-end md:pr-16 lg:pr-24 xl:pr-32 z-30 pointer-events-none px-4 md:px-0">
-                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-wide text-center md:text-right min-h-[2.5em] md:min-h-[3em] leading-tight text-black" style={{ fontFamily: '"Playfair Display", serif' }}>
+           {/* Mobile Layout: Stacked vertically */}
+           <div className="md:hidden absolute inset-0 flex flex-col items-center pt-20 sm:pt-24 z-30 pointer-events-none px-4">
+              {/* Name */}
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-wide text-center min-h-[2em] leading-tight text-black" style={{ fontFamily: '"Playfair Display", serif' }}>
+                {text}
+                <span className="animate-pulse text-green-500 font-sans">|</span>
+              </h2>
+              
+              {/* Coder tag - directly below name on mobile */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="mt-4 sm:mt-6"
+              >
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter font-mono text-black text-center">
+                  &lt;coder&gt;
+                </h2>
+                <p className="mt-2 sm:mt-3 text-sm sm:text-base font-mono text-center text-gray-600">
+                  Developer who writes<br/>
+                  clean, elegant and efficient code.
+                </p>
+              </motion.div>
+           </div>
+
+           {/* Desktop Layout: Left Content - Typing Animation */}
+           <div className="hidden md:flex absolute left-0 top-0 bottom-0 w-1/2 flex-col justify-center items-end pr-24 lg:pr-36 xl:pr-48 z-30 pointer-events-none">
+                 <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-wide text-right min-h-[3em] leading-tight text-black" style={{ fontFamily: '"Playfair Display", serif' }}>
                     {text}
                     <span className="animate-pulse text-green-500 font-sans">|</span>
                  </h2>
            </div>
 
-           {/* Right Content: Coder */}
-           <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 flex flex-col justify-end pb-8 sm:pb-12 md:pb-0 md:justify-center items-center md:items-start md:pl-32 lg:pl-48 xl:pl-60 z-30 pointer-events-none px-4 md:px-0">
+           {/* Desktop Layout: Right Content - Coder */}
+           <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/2 flex-col justify-center items-start pl-32 lg:pl-48 xl:pl-60 z-30 pointer-events-none">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }} 
               >
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter font-mono text-black">
+                <h2 className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter font-mono text-black">
                   &lt;coder&gt;
                 </h2>
-                <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl font-mono text-center md:text-left text-gray-600">
+                <p className="mt-6 text-xl font-mono text-left text-gray-600">
                   Developer who writes<br/>
                   clean, elegant and efficient code.
                 </p>
@@ -62,7 +87,7 @@ const Hero = () => {
            </div>
 
            {/* Central Image */}
-           <div className="absolute inset-x-0 bottom-0 h-[50vh] sm:h-[55vh] md:h-[70vh] lg:h-[80vh] flex justify-center items-end pointer-events-none">
+           <div className="absolute inset-x-0 bottom-0 h-[55vh] sm:h-[58vh] md:h-[70vh] lg:h-[80vh] flex justify-center items-end pointer-events-none">
               <motion.img 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
