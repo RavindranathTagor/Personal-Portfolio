@@ -1,17 +1,147 @@
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+/* ------------------------------------------------------------------
+   Theme tokens. Values are raw RGB channels so Tailwind's /alpha
+   modifier works (e.g. bg-ink-900/80). Dark is the default; the
+   `.light` class on <html> flips to light mode.
+------------------------------------------------------------------- */
+:root {
+  --bg: 11 11 11;            /* #0B0B0B */
+  --surface: 20 20 20;       /* #141414 */
+  --surface-2: 26 26 26;     /* #1A1A1A */
+  --border: 38 38 38;        /* #262626 */
+  --text: 250 250 250;       /* #FAFAFA */
+  --text-body: 212 212 216;  /* #D4D4D8 */
+  --text-muted: 161 161 170; /* #A1A1AA */
+  --text-subtle: 107 107 107;/* #6B6B6B */
+  --accent: 124 150 179;     /* #7C96B3 muted slate blue (subtle details) */
+  --accent-soft: 150 172 196;/* #96ACC4 */
+  --on-accent: 11 11 11;     /* dark text on accent/cta fills */
+  --cta: 255 255 255;        /* monochrome primary button = white on dark */
+  color-scheme: dark;
 }
 
-/* Prevent horizontal overflow on mobile */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
+.light {
+  --bg: 250 250 248;         /* #FAFAF8 warm off-white */
+  --surface: 255 255 255;    /* #FFFFFF */
+  --surface-2: 244 244 242;  /* #F4F4F2 */
+  --border: 229 229 224;     /* #E5E5E0 */
+  --text: 20 20 20;          /* #141414 */
+  --text-body: 63 63 70;     /* #3F3F46 */
+  --text-muted: 90 90 96;    /* #5A5A60 */
+  --text-subtle: 154 154 159;/* #9A9A9F */
+  --accent: 94 123 155;      /* #5E7B9B deeper slate blue for contrast on light */
+  --accent-soft: 74 100 130; /* #4A6482 */
+  --on-accent: 255 255 255;  /* white text on accent/cta fills */
+  --cta: 17 17 17;           /* monochrome primary button = near-black on light */
+  color-scheme: light;
 }
 
-#root {
-  overflow-x: hidden;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    @apply bg-ink-900 text-fg font-sans antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  #root {
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--on-accent));
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--border));
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--accent) / 0.6);
+  }
+}
+
+@layer components {
+  /* Reusable bento card surface */
+  .bento-card {
+    @apply relative rounded-3xl border border-ink-600 bg-ink-800 overflow-hidden
+           transition-all duration-300;
+  }
+  .bento-card:hover {
+    @apply border-accent/40;
+  }
+
+  /* Section title eyebrow chip */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em]
+           text-accent;
+  }
+
+  /* Pill tag */
+  .tag {
+    @apply inline-flex items-center px-3 py-1.5 rounded-full border border-ink-600
+           bg-ink-700 text-body text-xs sm:text-sm font-mono transition-colors;
+  }
+  .tag:hover {
+    @apply border-accent/50 text-accent;
+  }
+
+  /* Primary glow CTA */
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full
+           bg-cta text-onaccent font-semibold text-sm transition-all duration-300
+           shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_10px_30px_-8px_rgba(0,0,0,0.45)]
+           hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full
+           border border-ink-600 bg-ink-800 text-body font-semibold text-sm
+           transition-all duration-300 hover:border-accent/50 hover:text-fg hover:-translate-y-0.5;
+  }
+}
+
+@layer utilities {
+  /* Subtle film grain overlay (use on a fixed full-screen div) */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Themed gradient text (primary -> accent) */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, rgb(var(--text)) 0%, rgb(var(--text)) 45%, rgb(var(--accent)) 100%);
+  }
+
+  /* Radial accent glow blob */
+  .glow-blob {
+    background: radial-gradient(circle at center, rgb(var(--accent) / 0.12) 0%, rgb(var(--accent) / 0) 70%);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
 }
